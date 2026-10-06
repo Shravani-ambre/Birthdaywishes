@@ -1,0 +1,76 @@
+:root{--bg:#1d1646;--ink:#fff4e0;--soft:#c9bff0;--paper:#fff4e0;--paper-ink:#2a1a4a;--pink:#ff5d8f;--gold:#ffb703;--mint:#5fe3c0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#ffe6ee;--ink:#3a1030;--soft:#8a4a6a;--paper:#fffaf2;--paper-ink:#3a1030}}
+:root[data-theme="light"]{--bg:#ffe6ee;--ink:#3a1030;--soft:#8a4a6a;--paper:#fffaf2;--paper-ink:#3a1030}
+:root[data-theme="dark"]{--bg:#1d1646;--ink:#fff4e0;--soft:#c9bff0;--paper:#fff4e0;--paper-ink:#2a1a4a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:18px;line-height:1.55;overflow-x:hidden}
+h1,h2{font-family:"Bagel Fat One",Impact,system-ui,sans-serif;font-weight:400;line-height:1.05;margin:0}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:.8em 1.6em;background:var(--gold);color:#2a1a4a;font-weight:700;box-shadow:0 5px 0 #b57f00}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 #b57f00}
+button:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.wrap{max-width:560px;margin:0 auto;padding:0 22px}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+
+/* gate */
+#gate{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding:30px;position:fixed;inset:0;background:var(--bg);z-index:40;transition:opacity .6s,visibility .6s}
+#gate.gone{opacity:0;visibility:hidden}
+#gate h1{font-size:clamp(2rem,9vw,3.2rem)}
+#gate p{margin:0;color:var(--soft)}
+.gift{position:relative;width:150px;height:140px;animation:wob 1.6s ease-in-out infinite}
+.gift .box{position:absolute;bottom:0;left:0;right:0;height:95px;background:var(--pink);border-radius:8px}
+.gift .lid{position:absolute;bottom:88px;left:-9px;right:-9px;height:34px;background:#ff7fa6;border-radius:8px}
+.gift .rib{position:absolute;bottom:0;left:calc(50% - 14px);width:28px;height:122px;background:var(--gold)}
+.gift .bow{position:absolute;bottom:118px;left:calc(50% - 30px);width:60px;height:30px;border:7px solid var(--gold);border-radius:50% 50% 0 0}
+@keyframes wob{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+
+/* hero */
+.hero{padding:56px 0 30px;text-align:center}
+.hero h1{font-size:clamp(2.6rem,13vw,4.6rem);color:var(--gold)}
+.hero h1 span{display:block;color:var(--ink);font-size:.62em;margin-top:.15em}
+.hero p{color:var(--soft);margin:14px 0 0}
+.cake{position:relative;width:230px;margin:44px auto 26px}
+.tier{border-radius:14px 14px 6px 6px;position:relative}
+.t1{height:62px;width:150px;margin:0 auto;background:var(--pink)}
+.t2{height:76px;background:var(--mint);margin-top:-2px;border-radius:6px 6px 14px 14px}
+.t1::after,.t2::after{content:"";position:absolute;left:0;right:0;top:0;height:16px;background:var(--paper);border-radius:14px 14px 50% 50%/14px 14px 12px 12px;opacity:.95}
+.plate{height:12px;width:260px;margin:0 -15px;background:var(--soft);border-radius:50%;opacity:.7}
+.candles{position:absolute;top:-42px;left:0;right:0;display:flex;justify-content:center;gap:26px}
+.candle{width:10px;height:38px;background:repeating-linear-gradient(180deg,var(--paper) 0 8px,var(--gold) 8px 16px);border-radius:3px;position:relative}
+.flame{position:absolute;left:50%;top:-20px;width:14px;height:20px;margin-left:-7px;background:radial-gradient(circle at 50% 70%,#fff3b0,var(--gold) 60%,#ff7a00);border-radius:50% 50% 50% 50%/65% 65% 35% 35%;animation:fl .35s ease-in-out infinite alternate;transform-origin:50% 100%;transition:opacity .3s,transform .3s}
+.out .flame{opacity:0;transform:scale(.2)}
+.smoke{position:absolute;left:50%;top:-20px;width:4px;height:4px;border-radius:50%;background:var(--soft);opacity:0}
+.out .smoke{animation:sm 1.4s ease-out}
+@keyframes fl{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.1,.92) rotate(3deg)}}
+@keyframes sm{0%{opacity:.8;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-40px) scale(6)}}
+.hint{color:var(--soft);font-size:.9rem;margin-top:14px}
+
+/* revealed content */
+#after{display:none}
+#after.show{display:block}
+.letter{background:var(--paper);color:var(--paper-ink);border-radius:6px;padding:30px 26px;margin:34px 0;transform:rotate(-1.2deg);box-shadow:0 12px 30px rgba(0,0,0,.25);animation:drop .8s cubic-bezier(.2,1.2,.4,1)}
+@keyframes drop{from{opacity:0;transform:translateY(-40px) rotate(4deg)}to{opacity:1;transform:rotate(-1.2deg)}}
+.letter h2{font-size:1.9rem;margin-bottom:14px;color:var(--pink)}
+.letter p{margin:0 0 12px}
+.sign{font-weight:700;margin-top:18px}
+section{margin:56px 0}
+section h2{font-size:2rem;margin-bottom:6px}
+section>p{color:var(--soft);margin:0 0 18px}
+.reasons{list-style:none;margin:0;padding:0}
+.reasons li{padding:14px 0 14px 44px;border-bottom:2px dashed color-mix(in srgb,var(--soft) 40%,transparent);position:relative}
+.reasons li::before{content:"♥";position:absolute;left:6px;top:11px;color:var(--pink);font-size:1.4rem}
+.reasons li:nth-child(even)::before{color:var(--gold)}
+.tl{border-left:4px solid var(--pink);margin-left:8px;padding-left:22px}
+.tl div{position:relative;margin-bottom:24px}
+.tl div::before{content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--gold)}
+.tl b{display:block;color:var(--gold)}
+.tickets{display:grid;gap:14px}
+.ticket{width:100%;text-align:left;border-radius:14px;background:var(--paper);color:var(--paper-ink);box-shadow:0 5px 0 var(--pink);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ticket small{display:block;opacity:.7;font-weight:400}
+.ticket .tag{background:var(--pink);color:#fff;border-radius:999px;padding:.2em .8em;font-size:.8rem;white-space:nowrap}
+.ticket.used{background:var(--mint);box-shadow:0 5px 0 #2c9c7e}
+.ticket.used .tag{background:#2a1a4a}
+footer{text-align:center;padding:30px 0 60px;color:var(--soft)}
+footer .big{font-family:"Bagel Fat One",Impact,sans-serif;font-size:2rem;color:var(--gold)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
